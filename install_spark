@@ -1,0 +1,158 @@
+#------------- install spark (v1_27_Nov_2024)----------
+# --- [shaker sami] [Big Data Engineer] [shaker.samiy@gmail.com] [+201068448613  - +201117518670] ---
+
+
+#_______ Please note this installtion for OS fedora 40 __________
+
+#--1- installing Java ---
+#in your terminal write:
+sudo dnf install java-17-openjdk java-17-openjdk-devel
+
+#---check exact java path
+#in your terminal write:
+
+>readlink -f $(which java)
+
+# ------check home directory for java
+#in your terminal write:
+#Verify Java home directory:
+
+>ls /usr/lib/jvm
+
+
+Note:
+If the standard path doesn't work, try finding the exact path:
+#in your terminal write:
+>sudo find / -name "java" 2>/dev/null | grep bin/java
+
+#--2- insatlling spark ---
+#in your terminal write:
+>sudo dnf install spark python3 python3-pip jupyter-notebook
+
+#--3- updating paths ---
+#in your terminal write:
+>gedit ~/.bashrc
+
+#This will open *.bashrc,
+in this file copy and paste the following lines
+#-----------------------------------------------------------
+
+# JDK Configuration
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$PATH:$JAVA_HOME/bin
+
+# Spark Configuration
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin
+export PYSPARK_PYTHON=python3
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+#--------------------------------------------------------------
+
+#--4- updating shell configration ---
+#in your terminal write:
+source ~/.bashrc
+
+
+
+#--5- Running pyspark in jupyter notebook ---
+#in your terminal write:
+>pyspark
+#If the things going well you can see in your browser the home page of jupter notebook
+
+#--6- start working with pyspark---
+
+open a new python notebook,
+write pyspark
+press shift+enter
+
+then write 
+sc
+press shift+enter
+
+
+
+#---------------------------------- Another method (Manual) -------------------------
+Note there is alittle different method to do the above method:
+#--1- installing Java ---
+#in your browser:
+https://www.oracle.com/java/technologies/downloads/#jdk23-linux
+
+the downloaded file will .tar.gz
+#download the 
+x64 Compressed Archive
+the downloaded file will .tar.gz
+#unzip the downloaded file--------
+#in your terminal write:
+>cd [downloaded file location]
+>tar -xfv filename
+>ls                                        #the check the existance of the unziped directory
+> sudo mv [unzaped dirceory] /usr/lib/jvm/
+
+#---check exact java path
+#in your terminal write:
+>readlink -f $(which java)                      
+
+# ------check home directory for java
+#in your terminal write:
+#Verify Java home directory:
+
+>ls /usr/lib/jvm
+
+#--2- insatlling spark ---
+#in your browser:
+https://spark.apache.org/downloads.html
+
+#---download:
+Download Spark: spark-3.5.3-bin-hadoop3.tgz
+
+#This the link for the file that will be downloaded
+https://dlcdn.apache.org/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz
+
+#unzip the downloaded file--------
+#in your terminal write:
+>cd [downloaded file location]
+>tar -xfv filename
+>ls                                        #check the existance of the unziped directory
+> sudo mv [unzaped dirceory] /opt/spark
+
+
+#--3- updating paths ---
+#in your terminal write:
+>gedit ~/.bashrc                              # note if you get error run: >sudo dnf install gedit
+
+#This will open *.bashrc,
+in this file copy and paste the following lines
+#-----------------------------------------------------------
+
+# JDK Configuration
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk   # this from the output(>readlink -f $(which java)) 
+export PATH=$PATH:$JAVA_HOME/bin
+
+# Spark Configuration
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin
+export PYSPARK_PYTHON=python3
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+#--------------------------------------------------------------
+
+#--4- updating shell configration ---
+#in your terminal write:
+source ~/.bashrc
+
+
+#--5- Running pyspark in jupyter notebook ---
+#in your terminal write:
+>pyspark
+#If the things going well you can see in your browser the home page of jupter notebook
+
+#--6- start working with pyspark---
+
+open a new python notebook,
+write pyspark
+press shift+enter
+
+then write 
+sc
+press shift+enter
